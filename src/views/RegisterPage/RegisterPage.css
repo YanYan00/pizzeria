@@ -1,0 +1,17 @@
+.formulario-registro{
+    padding: 26vh 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap :20px;
+}
+.row{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.boton{
+    width: 100px;
+}

@@ -1,0 +1,12 @@
+#cont{
+    height: 83.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 6px;
+}
+#cont img{
+    width: 500px;
+}

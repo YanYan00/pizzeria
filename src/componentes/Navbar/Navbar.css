@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: rgb(33, 33, 33);
+    color: white;
+    box-sizing: border-box;
+}
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+  
+.botonNav {
+    background-color: rgb(33, 33, 33);
+    color: white;
+    border-color: white;
+}
+  
+.carro {
+    background-color: rgb(33, 33, 33);
+    color: rgb(59, 200, 225);
+    border-color: rgb(59, 200, 225);
+}

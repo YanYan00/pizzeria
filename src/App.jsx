@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Navbar from './componentes/Navbar/Navbar'
+import Footer from './componentes/Footer/Footer'
+import CartPizza from './views/CartPizza/CartPizza'
+import Home from './views/Home/Home'
+import Pizza from './views/Pizza/Pizza'
+import LoginPage from './views/LoginPage/LoginPage'
+import RegisterPage from './views/RegisterPage/RegisterPage'
+import {BrowserRouter, Route, Routes} from "react-router-dom"
+import NotFound from './views/NotFound/NotFound'
+import Profile from './componentes/Profile/Profile'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function App() { 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Navbar></Navbar>
+      <Routes>
+        <Route path='/pizzeria' element={<Home></Home>}></Route>
+        <Route path='/pizzeria/register' element={<RegisterPage></RegisterPage>}></Route>
+        <Route path='/pizzeria/login' element={<LoginPage></LoginPage>}></Route>
+        <Route path='/pizzeria/cart' element={<CartPizza></CartPizza>}></Route>
+        <Route path='/pizzeria/p001' element={<Pizza></Pizza>}></Route>
+        <Route path='/pizzeria/profile' element={<Profile></Profile>}></Route>
+        <Route path='*' element={<NotFound></NotFound>}></Route>
+      </Routes>    
+      <Footer></Footer>
+    </BrowserRouter>
   )
 }
 
 export default App
+
