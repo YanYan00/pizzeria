@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import './Navbar.css'
+import { CartContext } from '../../context/CartContext';
 
 const Navbar = () => {
-    const total = 0;
+    const {total} = useContext(CartContext);
     const token = false;
     return (
       <div className='navbar'>
@@ -21,10 +22,11 @@ const Navbar = () => {
             <>
               <Link to='/pizzeria/login'><Button className='botonNav'>🔐 Login</Button></Link>
               <Link to='/pizzeria/register'><Button className='botonNav'>🔐 Register</Button></Link>
+              
             </>
           )}
         </div>
-        <Link to='/pizzeria/cart'><Button className='botonNav carro'>🛒 Total: ${total.toLocaleString()}</Button></Link>  
+        <Link to='/pizzeria/cart'><Button className='botonNav carro'>🛒 Total: ${total.toLocaleString()}</Button></Link>
       </div>
     );
 }

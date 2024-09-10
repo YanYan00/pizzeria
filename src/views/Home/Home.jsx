@@ -1,29 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import './Home.css'
 import Header from '../../componentes/Header/Header'
 import CardPizza from '../../componentes/CardPizza/CardPizza'
+import { CartContext } from '../../context/CartContext'
+import { PizzasContext } from '../../context/PizzasContext'
 
 const Home = () => {
-  const [pizzas, setPizzas] = useState([]);
+  const {añadirPizza} = useContext(CartContext);
+  const {consultarApi,pizzas} = useContext(PizzasContext);
   useEffect(() => {
     consultarApi();
   }, [])
-  const consultarApi = async()=>{
-    const url = "http://localhost:5000/api/pizzas";
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setPizzas(data);
-    }catch (error) {
-      console.error("Hubo un problema con la solicitud Fetch:", error);
-    }
-  }
   return (
     <>
       <Header />
       <div className='cards'>
         {pizzas.map((pizza, index) => (
-          <CardPizza pizza={pizza} key={index} />
+          <CardPizza pizza={pizza} key={index} añadirPizza ={añadirPizza} />
         ))}
       </div>
       

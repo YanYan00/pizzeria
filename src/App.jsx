@@ -9,22 +9,30 @@ import RegisterPage from './views/RegisterPage/RegisterPage'
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import NotFound from './views/NotFound/NotFound'
 import Profile from './componentes/Profile/Profile'
+import CartProvider from './context/CartContext'
+import PizzasProvider from './context/PizzasContext'
 
 function App() { 
   return (
-    <BrowserRouter>
-      <Navbar></Navbar>
-      <Routes>
-        <Route path='/pizzeria' element={<Home></Home>}></Route>
-        <Route path='/pizzeria/register' element={<RegisterPage></RegisterPage>}></Route>
-        <Route path='/pizzeria/login' element={<LoginPage></LoginPage>}></Route>
-        <Route path='/pizzeria/cart' element={<CartPizza></CartPizza>}></Route>
-        <Route path='/pizzeria/p001' element={<Pizza></Pizza>}></Route>
-        <Route path='/pizzeria/profile' element={<Profile></Profile>}></Route>
-        <Route path='*' element={<NotFound></NotFound>}></Route>
-      </Routes>    
-      <Footer></Footer>
-    </BrowserRouter>
+    <CartProvider>
+      <PizzasProvider>
+        <BrowserRouter>
+          <Navbar></Navbar>
+          <Routes>
+            <Route path='/pizzeria' element={<Home></Home>}></Route>
+            <Route path='/pizzeria/register' element={<RegisterPage></RegisterPage>}></Route>
+            <Route path='/pizzeria/login' element={<LoginPage></LoginPage>}></Route>
+            <Route path='/pizzeria/cart' element={<CartPizza></CartPizza>}></Route>
+            <Route path='/pizzeria/p001' element={<Pizza></Pizza>}></Route>
+            <Route path='/pizzeria/profile' element={<Profile></Profile>}></Route>
+            <Route path='*' element={<NotFound></NotFound>}></Route>
+          </Routes>    
+          <Footer></Footer>
+        </BrowserRouter>  
+      </PizzasProvider>
+      
+    </CartProvider>
+      
   )
 }
 

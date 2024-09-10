@@ -3,7 +3,7 @@ import './CardPizza.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 
-const CardPizza = ({pizza}) => {
+const CardPizza = ({pizza,añadirPizza}) => {
   return (
     <>
       <div className='cardPizza'>
@@ -20,7 +20,7 @@ const CardPizza = ({pizza}) => {
           <h3>Precio: ${pizza.price.toLocaleString()}</h3>
           <div className='botones'>
             <Button id='boton1'>Ver Más 👀</Button>
-            <Button id='boton2'>Añadir 🛒</Button>
+            <Button id='boton2' onClick={()=> añadirPizza(pizza)}>Añadir 🛒</Button>
           </div>
         </div>
       </div>
