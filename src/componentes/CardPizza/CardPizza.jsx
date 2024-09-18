@@ -2,8 +2,13 @@ import React from 'react'
 import './CardPizza.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 const CardPizza = ({pizza,añadirPizza}) => {
+  const navigate = useNavigate();
+  const verPizza = (pizza) => {
+    navigate(`/pizzeria/${pizza.id}`);
+  }
   return (
     <>
       <div className='cardPizza'>
@@ -19,7 +24,7 @@ const CardPizza = ({pizza,añadirPizza}) => {
           </ul>
           <h3>Precio: ${pizza.price.toLocaleString()}</h3>
           <div className='botones'>
-            <Button id='boton1'>Ver Más 👀</Button>
+            <Button id='boton1' onClick={()=> verPizza(pizza)}>Ver Más 👀</Button>
             <Button id='boton2' onClick={()=> añadirPizza(pizza)}>Añadir 🛒</Button>
           </div>
         </div>

@@ -1,7 +1,9 @@
 import React, {useEffect ,useState } from 'react'
 import './Pizza.css'
+import { useParams } from 'react-router-dom';
 
 const Pizza = () => {
+    const {id}= useParams();
     const [pizza, setPizza] = useState({
         desc:''
         ,id:''
@@ -14,7 +16,7 @@ const Pizza = () => {
         consultarApi();
     }, [])
     const consultarApi = async()=>{
-        const url = "http://localhost:5000/api/pizzas/p001";
+        const url = `http://localhost:5000/api/pizzas/${id}`;
         try {
             const response = await fetch(url);
             const data = await response.json();

@@ -23,7 +23,9 @@
     color: white;
     border-color: white;
 }
-  
+.botonNav:hover{
+    background-color: rgb(88, 88, 88);
+}
 .carro {
     background-color: rgb(33, 33, 33);
     color: rgb(59, 200, 225);

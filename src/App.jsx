@@ -11,8 +11,11 @@ import NotFound from './views/NotFound/NotFound'
 import Profile from './componentes/Profile/Profile'
 import CartProvider from './context/CartContext'
 import PizzasProvider from './context/PizzasContext'
+import UserProvider, { UserContext } from './context/UserContext'
+import { useContext } from 'react'
 
-function App() { 
+function App() {
+  const {token} = useContext(UserContext); 
   return (
     <CartProvider>
       <PizzasProvider>
@@ -23,16 +26,14 @@ function App() {
             <Route path='/pizzeria/register' element={<RegisterPage></RegisterPage>}></Route>
             <Route path='/pizzeria/login' element={<LoginPage></LoginPage>}></Route>
             <Route path='/pizzeria/cart' element={<CartPizza></CartPizza>}></Route>
-            <Route path='/pizzeria/p001' element={<Pizza></Pizza>}></Route>
-            <Route path='/pizzeria/profile' element={<Profile></Profile>}></Route>
+            <Route path='/pizzeria/:id' element={<Pizza></Pizza>}></Route>
+            <Route path='/pizzeria/profile' element={token ? <Profile></Profile> : <LoginPage></LoginPage>}></Route>
             <Route path='*' element={<NotFound></NotFound>}></Route>
           </Routes>    
           <Footer></Footer>
-        </BrowserRouter>  
-      </PizzasProvider>
-      
-    </CartProvider>
-      
+        </BrowserRouter> 
+      </PizzasProvider> 
+    </CartProvider>      
   )
 }
 
