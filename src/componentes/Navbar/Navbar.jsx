@@ -8,7 +8,7 @@ import { UserContext } from '../../context/UserContext';
 
 const Navbar = () => {
     const {total} = useContext(CartContext);
-    const {token,estadoToken} = useContext(UserContext);
+    const {token,logout} = useContext(UserContext);
     return (
       <div className='navbar'>
         <div className='nav-left'>
@@ -17,7 +17,7 @@ const Navbar = () => {
           {token ? (
             <>
               <Link to='/pizzeria/profile'><Button className='botonNav'>🔓 Profile</Button></Link>
-              <Button className='botonNav' onClick={()=>{estadoToken(false)} } >🔒 Logout</Button>
+              <Button className='botonNav' onClick={logout} >🔒 Logout</Button>
             </>
           ) : (
             <>

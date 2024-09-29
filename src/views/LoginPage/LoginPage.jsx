@@ -3,29 +3,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Col, Row } from 'react-bootstrap';
 import './LoginPage.css'
 import { UserContext } from '../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     const [mail,setMail] = useState("");
-    const [pass,setPass] = useState("");
-    const {estadoToken} = useContext(UserContext);
-    const navigate = useNavigate();
+    const [password,setPassword] = useState("");
+    const {handleSubmit} = useContext(UserContext);
     const validarLogin =(e)=>{
         e.preventDefault();
-        if(mail === "" || pass===""){
+        if(mail === "" || password===""){
             alert("Complete todos los campos");
             return false;
         }
-        if(pass.length<6){
+        if(password.length<6){
             alert("La contraseña contiene menos de 6 caracteres");
             return false;
         }
-        estadoToken(true);
-        navigate('/pizzeria');
-        alert("Usuario validado");
+        handleSubmit(e,'login',mail,password);
+        
     }
     return (
-        <form className='formulario'>
+        <form className='formulario' onSubmit={validarLogin}>
                 <Row className='row'>
                     <Col>Email:
                     </Col>
@@ -35,10 +32,10 @@ const LoginPage = () => {
                 <Row className='row'>
                     <Col>Contraseña:
                     </Col>
-                    <Col><input type="password" onChange={(e) => setPass(e.target.value)}/>
+                    <Col><input type="password" onChange={(e) => setPassword(e.target.value)}/>
                     </Col>
                 </Row>
-                <Button className='boton' onClick={(e)=>validarLogin(e)}>Enviar</Button>
+                <Button className='boton' type="submit">Enviar</Button>
         </form>
     )
 }

@@ -11,7 +11,7 @@ import NotFound from './views/NotFound/NotFound'
 import Profile from './componentes/Profile/Profile'
 import CartProvider from './context/CartContext'
 import PizzasProvider from './context/PizzasContext'
-import UserProvider, { UserContext } from './context/UserContext'
+import { UserContext } from './context/UserContext'
 import { useContext } from 'react'
 
 function App() {
@@ -19,7 +19,6 @@ function App() {
   return (
     <CartProvider>
       <PizzasProvider>
-        <BrowserRouter>
           <Navbar></Navbar>
           <Routes>
             <Route path='/pizzeria' element={<Home></Home>}></Route>
@@ -31,7 +30,6 @@ function App() {
             <Route path='*' element={<NotFound></NotFound>}></Route>
           </Routes>    
           <Footer></Footer>
-        </BrowserRouter> 
       </PizzasProvider> 
     </CartProvider>      
   )

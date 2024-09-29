@@ -1,24 +1,33 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import './Profile.css'
 import { UserContext } from '../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-    const email= "jean.rojas@gmail.com";
-    const navigate = useNavigate();
-    const {estadoToken} = useContext(UserContext);
-    const handleLogout = () =>{
-        estadoToken(false);
-        navigate('/pizzeria/login');
-    }
+    const [user, setUser] = useState(null);
+    const {token,logout}= useContext(UserContext);
+    useEffect(()=>{
+        fetch('http://localhost:5000/api/auth/me',{
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then((response)=> response.json())
+        .then((data)=>setUser(data))
+        .catch((error)=>{
+            setUser(null);
+        })
+    },[token])
     return (
         <div className='profile'>
-            <div className='cont'>
-                <p>Correo de usuario: {email}</p>
-                <Button className='cerrar' onClick={handleLogout}>Cerrar Sesión</Button>
-            </div>
+            {user ? (
+                <div className='cont'>
+                <p>Correo de usuario: {user.email}</p>
+                <Button className='cerrar' onClick={logout}>Cerrar Sesión</Button>
+                </div>) : (<p>Inicia sesion para revisar tu perfil.</p>)
+            }
+            
             
         </div>
     )
