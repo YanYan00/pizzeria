@@ -3,34 +3,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import './Profile.css'
 import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-    const [user, setUser] = useState(null);
-    const {token,logout}= useContext(UserContext);
-    useEffect(()=>{
-        fetch('http://localhost:5000/api/auth/me',{
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
-        .then((response)=> response.json())
-        .then((data)=>setUser(data))
-        .catch((error)=>{
-            setUser(null);
-        })
-    },[token])
+    const {getUserProfile,logout,token,email}= useContext(UserContext);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(!token){
+            navigate('/pizzeria/login');
+        }
+        else{
+            getUserProfile();
+        }
+      }, []);
     return (
         <div className='profile'>
-            {user ? (
+            {token ? (
                 <div className='cont'>
-                <p>Correo de usuario: {user.email}</p>
-                <Button className='cerrar' onClick={logout}>Cerrar Sesión</Button>
-                </div>) : (<p>Inicia sesion para revisar tu perfil.</p>)
+                <p>Correo de usuario: {email} </p>
+                <Button className='cerrar' onClick={logout}>Cerrar Sesión  </Button>
+                </div>) : (<></>)
             }
-            
-            
         </div>
     )
 }
-
 export default Profile

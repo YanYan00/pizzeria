@@ -16,7 +16,7 @@ const Navbar = () => {
           <Link to='/pizzeria'><Button className='botonNav'>🍕 Home</Button></Link>
           {token ? (
             <>
-              <Link to='/pizzeria/profile'><Button className='botonNav'>🔓 Profile</Button></Link>
+              <Link to='/pizzeria/profile'><Button className='botonNav' >🔓 Profile</Button></Link>
               <Button className='botonNav' onClick={logout} >🔒 Logout</Button>
             </>
           ) : (

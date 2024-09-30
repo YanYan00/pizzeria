@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Col, Row } from 'react-bootstrap';
 import './RegisterPage.css'
+import { UserContext } from '../../context/UserContext';
 
 const RegisterPage = () => {
     const [email,setEmail]= useState("");
     const [password,setPassword]= useState("");
     const [confirmPassword,setConfirmPassword]=useState("");
+    const {handleSubmit} =useContext(UserContext);
     const validarFormulario = (e) => {
         e.preventDefault();
         if(email === "" || password === "" || confirmPassword===""){
@@ -22,9 +24,10 @@ const RegisterPage = () => {
             return false;
         }
         alert("Formulario completado");
+        handleSubmit(e,'register',email,password);
     }
     return (
-        <form className='formulario-registro'>
+        <form className='formulario-registro' onSubmit={validarFormulario}>
             <Row className='row'>
                 <Col>Email:
                 </Col>
@@ -43,7 +46,7 @@ const RegisterPage = () => {
                 <Col><input type="password" onChange={(e) => setConfirmPassword(e.target.value)}/>
                 </Col>
             </Row>
-            <Button className='boton' onClick={(e)=>validarFormulario(e)}>Enviar</Button>
+            <Button className='boton' type='submit'>Enviar</Button>
         </form>
     )
 }

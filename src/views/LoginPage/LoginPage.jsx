@@ -5,12 +5,12 @@ import './LoginPage.css'
 import { UserContext } from '../../context/UserContext';
 
 const LoginPage = () => {
-    const [mail,setMail] = useState("");
+    const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const {handleSubmit} = useContext(UserContext);
     const validarLogin =(e)=>{
         e.preventDefault();
-        if(mail === "" || password===""){
+        if(email === "" || password===""){
             alert("Complete todos los campos");
             return false;
         }
@@ -18,7 +18,7 @@ const LoginPage = () => {
             alert("La contraseña contiene menos de 6 caracteres");
             return false;
         }
-        handleSubmit(e,'login',mail,password);
+        handleSubmit(e,'login',email,password);
         
     }
     return (
@@ -26,7 +26,7 @@ const LoginPage = () => {
                 <Row className='row'>
                     <Col>Email:
                     </Col>
-                    <Col><input type="email" onChange={(e) => setMail(e.target.value)}/>
+                    <Col><input type="email" onChange={(e) => setEmail(e.target.value)}/>
                     </Col>
                 </Row>
                 <Row className='row'>
