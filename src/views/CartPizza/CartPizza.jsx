@@ -1,11 +1,11 @@
-import React, {useContext } from 'react';
+import React, {useContext, useEffect } from 'react';
 import { CartContext } from '../../context/CartContext';
 import './CartPizza.css'
 import { Button } from 'react-bootstrap';
 import { UserContext } from '../../context/UserContext';
 
 const CartPizza = () => {
-    const {cart,total,añadirPizza,eliminarPizza} = useContext(CartContext);
+    const {cart,total,añadirPizza,eliminarPizza,handleSubmitCart} = useContext(CartContext);
     const {token} = useContext(UserContext);
     return (
         <>
@@ -24,7 +24,7 @@ const CartPizza = () => {
                         
                     </div>
                 ))}
-                <Button className='botonPagar' disabled={!token}>Pagar</Button>   
+                <Button className='botonPagar' disabled={!token} onClick={(e) => handleSubmitCart(e, cart)}>Pagar</Button>   
             </div>
         </>
     )

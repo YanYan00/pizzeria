@@ -5,12 +5,12 @@ export const UserContext = createContext();
 const UserProvider = ({children})=> {
     const [email, setEmail] = useState(null);
     const [token,setToken] = useState(null);
-    const [profile, setProfile] = useState(null);
     const navigate = useNavigate();
     const logout = () =>{
       setEmail(null);
       setToken(null);
-      setProfile(null);
+      localStorage.removeItem('token');
+      localStorage.removeItem('cart');
     }
     
     const handleSubmit= async (e, type, email ,password) =>{
@@ -33,6 +33,7 @@ const UserProvider = ({children})=> {
           alert("Logeado correctamente");
           setEmail(data.email);
           setToken(data.token);
+          localStorage.setItem('token',data.token);
           navigate('/pizzeria');
         } else {
           alert(data.error || "Error de autenticación");
@@ -61,6 +62,14 @@ const UserProvider = ({children})=> {
         console.error("Error de red al obtener el perfil del usuario", error);
       }
     };
+    
+    useEffect(() => {
+      localStorage.getItem('token');
+      const tokenStorage = localStorage.getItem('token');
+      if(tokenStorage){
+        setToken(tokenStorage);
+      }
+    }, [])
     
     return(
         <UserContext.Provider value={{token,email,handleSubmit,getUserProfile,logout}}>
